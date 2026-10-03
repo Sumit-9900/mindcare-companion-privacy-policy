@@ -1,0 +1,505 @@
+/* ==========================================================================
+   MindCare Companion — Privacy Policy
+   --------------------------------------------------------------------------
+   Every value below mirrors a literal constant in the Flutter app:
+     - lib/core/theme/app_theme.dart          (AppTheme.lightTheme)
+     - lib/core/theme/app_theme_constants.dart (AppThemeConstants)
+
+   Card radius, button radius, elevation, spacing tokens and typography all
+   match what the user sees in the app. This page itself sets no cookies,
+   loads no external font, and runs no third-party scripts.
+   ========================================================================== */
+
+:root {
+  /* === AppThemeConstants.* (light) ====================================== */
+  --c-primary:          #2F665A;   /* primaryLight                       */
+  --c-primary-variant:  #1D4C42;   /* primaryVariantLight                */
+  --c-secondary:        #8BA89A;   /* secondaryLight                     */
+  --c-secondary-variant:#6E8E7F;   /* secondaryVariantLight              */
+  --c-success:          #3E7C68;   /* successLight                       */
+  --c-warning:          #C8834E;   /* warningLight                       */
+  --c-error:            #B85450;   /* errorLight                         */
+
+  --c-background:       #F7F8F4;   /* backgroundLight / scaffold         */
+  --c-surface:          #FFFEFA;   /* surfaceLight / cards / AppBar      */
+  --c-surface-variant:  #EDF1EB;   /* surfaceVariantLight / input fills  */
+  --c-outline:          #D5DDD5;   /* outlineLight / borders             */
+  --c-dialog:           #FFFFFF;   /* dialogLight                        */
+
+  --c-text-primary:     #1C2925;   /* textPrimaryLight                    */
+  --c-text-secondary:   #5B6B65;   /* textSecondaryLight                */
+
+  /* Shadow + tint helpers (AppThemeConstants.shadowLight = 0x08000000) */
+  --c-shadow:           rgba(0, 0, 0, 0.03);
+  --c-divider:          rgba(0, 0, 0, 0.04);
+
+  /* === AppTheme.radius (BorderRadius) ==================================== */
+  --radius-card:        12px;      /* CardTheme: BorderRadius.circular(12) */
+  --radius-button:      12px;      /* ElevatedButton / OutlinedButton     */
+  --radius-chip:        16px;      /* ChipTheme                           */
+  --radius-input:       12px;      /* InputDecoration                     */
+  --radius-tile:        10px;      /* AppThemeConstants.radiusSmall        */
+  --radius-fab:        16px;      /* FAB                                 */
+  --radius-pill:        999px;
+
+  /* === AppTheme.elevation ================================================ */
+  --elev-appbar:        2;
+  --elev-card:          1;
+  --elev-button:        2;
+  --elev-fab:           4;
+  --elev-bottomnav:     4;
+  --elev-snackbar:      4;
+
+  /* === Spacing tokens (AppThemeConstants.spacing*) ====================== */
+  --sp-xs:    4px;
+  --sp-s:     8px;
+  --sp-splus: 12px;
+  --sp-m:     16px;
+  --sp-mplus: 20px;
+  --sp-l:     24px;
+  --sp-xl:    32px;
+  --sp-xxl:   48px;
+
+  /* === Typography ======================================================== */
+  /* The Flutter app uses Google Fonts Inter. The web-safe fall-back stack
+     below preserves the calm, modern feel without making a third-party
+     request. */
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+               "Liberation Mono", monospace;
+}
+
+/* The MindCare Companion app ships a light-only theme — see
+   AppTheme.lightTheme in lib/core/theme/app_theme.dart. This page matches
+   that decision: it always renders in the light theme, regardless of the
+   visitor's OS-level prefers-color-scheme. (Keeping the page on-brand
+   matters more than mirroring the system look.) */
+
+@media (prefers-color-scheme: dark) {
+  /* Force light palette even when the OS is in dark mode. */
+  :root {
+    color-scheme: light;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--c-text-primary);
+  background: var(--c-background);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a {
+  color: var(--c-primary-variant);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+a:hover { color: var(--c-primary); }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--c-surface-variant);
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  color: var(--c-primary-variant);
+}
+
+/* ==========================================================================
+   Accessibility / skip link
+   ========================================================================== */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: var(--c-primary);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-input);
+  z-index: 1000;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--sp-l);
+}
+
+/* ==========================================================================
+   Header — mirrors CustomAppBar (surface, elevation 2, foreground = text)
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-outline);
+  box-shadow: 0 var(--elev-appbar)px 0 var(--c-shadow);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-m);
+  padding: var(--sp-s) var(--sp-l);
+}
+
+/* Brand mark mirrors the in-app BrandMark widget:
+     borderRadius = size * 0.32
+     shadow = primary @ 18% opacity, offset 0,size*0.1, blur size*0.28   */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--c-text-primary);
+}
+.brand:hover { color: var(--c-primary); }
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px; /* 44 * 0.32 ≈ 14 */
+  overflow: hidden;
+  box-shadow:
+    0 2px 12px rgba(47, 102, 90, 0.18),
+    0 4px 4px rgba(47, 102, 90, 0.06);
+  background: var(--c-surface-variant);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-mark img,
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.brand-name {
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.15px;
+  color: var(--c-text-primary);
+}
+.brand-sub {
+  font-size: 0.78rem;
+  color: var(--c-text-secondary);
+  margin-top: 2px;
+}
+
+.header-nav {
+  display: flex;
+  gap: var(--sp-l);
+  font-size: 0.92rem;
+}
+.header-nav a {
+  color: var(--c-text-secondary);
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.header-nav a:hover {
+  color: var(--c-primary);
+  border-bottom-color: var(--c-primary);
+}
+
+/* ==========================================================================
+   Hero — mirrors GreetingCard (primary/secondary @ 10% gradient)
+   ========================================================================== */
+.hero {
+  padding: 56px 0 24px;
+  background:
+    linear-gradient(135deg,
+      rgba(47, 102, 90, 0.10) 0%,
+      rgba(139, 168, 154, 0.10) 100%),
+    var(--c-background);
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-primary);
+  margin: 0 0 var(--sp-s) 0;
+}
+
+.hero h1 {
+  margin: 0 0 var(--sp-m) 0;
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: var(--c-text-primary);
+}
+
+.lede {
+  font-size: clamp(1rem, 2.4vw, 1.12rem);
+  color: var(--c-text-secondary);
+  max-width: 70ch;
+  margin: 0 0 var(--sp-l) 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-s) var(--sp-splus);
+  font-size: 0.88rem;
+  color: var(--c-text-secondary);
+  margin: 0;
+}
+.meta strong { color: var(--c-text-primary); font-weight: 500; }
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+.layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: var(--sp-xl);
+  padding: var(--sp-l) var(--sp-l) var(--sp-xxl);
+}
+
+@media (max-width: 880px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--sp-mplus);
+  }
+}
+
+/* ==========================================================================
+   TOC
+   ========================================================================== */
+.toc {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+  background: var(--c-surface);
+  border: 1px solid var(--c-outline);
+  border-radius: var(--radius-card);
+  padding: var(--sp-m) var(--sp-m) var(--sp-mplus);
+  box-shadow: 0 var(--elev-card)px 4px var(--c-shadow);
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+}
+.toc-title {
+  margin: 0 0 var(--sp-s) 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--c-text-secondary);
+}
+.toc ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: section;
+}
+.toc li {
+  margin: 2px 0;
+  counter-increment: section;
+}
+.toc a {
+  display: block;
+  padding: 5px 0 5px var(--sp-s);
+  margin-left: calc(-1 * var(--sp-s));
+  font-size: 0.92rem;
+  color: var(--c-text-secondary);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.toc a:hover {
+  color: var(--c-primary);
+  border-left-color: var(--c-primary);
+}
+.toc a::before {
+  content: counter(section) ". ";
+  color: var(--c-text-secondary);
+  font-variant-numeric: tabular-nums;
+  margin-right: 4px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 880px) {
+  .toc { position: static; max-height: none; }
+}
+
+/* ==========================================================================
+   Cards — CardThemeData(color: cardLight, elevation: 1, radius: 12)
+   ========================================================================== */
+.content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-mplus);
+}
+
+.card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-outline);
+  border-radius: var(--radius-card);
+  padding: clamp(var(--sp-mplus), 2.5vw, var(--sp-l));
+  box-shadow: 0 var(--elev-card)px 4px var(--c-shadow);
+  scroll-margin-top: 96px;
+}
+
+.card.highlight {
+  background: #FBF4E7;
+  border-color: #E7D6A8;
+}
+
+.card h2 {
+  margin: 0 0 var(--sp-s) 0;
+  font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  color: var(--c-text-primary);
+}
+.card h3 {
+  margin: var(--sp-l) 0 var(--sp-s) 0;
+  font-size: 1.05rem;
+  color: var(--c-primary-variant);
+  letter-spacing: 0;
+}
+
+.card p {
+  margin: 0 0 var(--sp-s) 0;
+  color: var(--c-text-secondary);
+}
+.card ul, .card ol {
+  margin: 0 0 var(--sp-s) 0;
+  padding-left: var(--sp-mplus);
+  color: var(--c-text-secondary);
+}
+.card li {
+  margin-bottom: 6px;
+}
+.card ul ul { margin: 6px 0 var(--sp-s); }
+.card strong { color: var(--c-text-primary); font-weight: 600; }
+
+/* Check-list bullets */
+.check-list {
+  list-style: none;
+  padding-left: 0;
+}
+.check-list li {
+  position: relative;
+  padding-left: var(--sp-mplus);
+  margin-bottom: var(--sp-s);
+}
+.check-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, var(--c-success) 0 38%, transparent 41%);
+  border: 2px solid var(--c-success);
+}
+
+/* Open-list (yellow card) */
+.open-list { padding-left: var(--sp-mplus); }
+.open-list li { margin-bottom: var(--sp-s); }
+
+/* Contact */
+.contact-list {
+  list-style: none;
+  padding-left: 0;
+}
+.contact-list li {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface-variant);
+  border-radius: var(--radius-input);
+  padding: var(--sp-s) var(--sp-m);
+  margin-bottom: var(--sp-s);
+}
+.contact-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--c-primary);
+}
+.contact-value {
+  margin-top: 3px;
+  color: var(--c-text-primary);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer-note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--c-text-secondary);
+}
+
+.site-footer {
+  border-top: 1px solid var(--c-outline);
+  background: var(--c-surface);
+  padding: var(--sp-l) 0 var(--sp-xl);
+  margin-top: var(--sp-m);
+}
+.site-footer p {
+  margin: 0 0 5px 0;
+  color: var(--c-text-secondary);
+  font-size: 0.9rem;
+}
+.muted { color: var(--c-text-secondary); }
+
+/* ==========================================================================
+   Mobile tweaks
+   ========================================================================== */
+@media (max-width: 720px) {
+  .header-nav { display: none; }
+  .hero { padding: 36px 0 18px; }
+  .layout { padding: var(--sp-m) var(--sp-m) var(--sp-xxl); }
+  .container { padding: 0 var(--sp-m); }
+  .header-inner { padding: var(--sp-s) var(--sp-m); }
+}
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+@media print {
+  .site-header, .site-footer, .toc { display: none; }
+  body { background: #fff; color: #000; }
+  .card { box-shadow: none; border-color: #ccc; page-break-inside: avoid; }
+  a { color: #000; text-decoration: underline; }
+}
